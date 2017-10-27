@@ -1,0 +1,246 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+      <!-- off-canvas title bar for 'small' screen -->
+      <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+        <div class="title-bar-left">
+          <ul class="menu">
+            <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+          </ul>
+        </div>
+        <div class="title-bar-right">
+          <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+        </div>
+      </div>
+
+      <!-- off-canvas left menu -->
+      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+        <!-- Close button -->
+        <button class="close-button" aria-label="Close menu" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        <ul class="vertical dropdown menu" data-dropdown-menu>
+          <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+          <li><br></li>
+          <li><a class="hollowbutton button" href="teacherpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+          <li><a class="hollowbutton button" href="teacherassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+          <li><a class="hollowbutton button" href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+          <li><a class="hollowbutton button" href="teachergrade.html"><i class="icons fi-list-bullet"></i><span>Grading</span></a></li>
+          <li><a class="hollowbutton button" href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+          <li><br></br></li>
+          <li><br></br></li>
+          <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+        </ul>
+      </div>
+
+      <!-- "wider" top-bar menu for 'medium' and up -->
+      <div id="widemenu" class="widemenu callout primary medium head">
+        <div class="row columns small-12 medium-12 large-12">
+          <div class="columns small-4 medium-4 large-4">
+          <ul class="menu align-left">
+            <li><a href="teacherpage.html"><i class="icons fi-arrow-left"></i></a></li>
+            <li>
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <a href="#"><i class="icons fi-list"></i></a>
+                  <ul class="menu">
+                    <li><a href="teacherassignments.html"><i class="icons fi-list-thumbnails"></i><span>Assignments</span></a></li>
+                    <li><a href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+                    <li><a href="teachergrade.html"><i class="icons fi-filter"></i><span>Grading</span></a></li>
+                    <li><a href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+          <div class="columns small-4 medium-4 large-4">
+            <ul class="menu-centered">
+              <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+            </ul>
+          </div>
+          <div class="columns small-4 medium-4 large-4">  
+          <ul class="menu align-right">
+            <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- original content goes in this container -->
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="widebody">  
+          <div class="innerwidebody">
+            <div class="callout">
+              <fieldset class="fieldset">
+                <legend>Messages</legend>
+                <form>
+                  <div id="message" class="row columns small-12 medium-12 large-12">
+                    <div class="columns medium-3 large-3">
+                      <select id="class" name="class">
+                      </select>
+                    </div>
+                    <div class="columns medium-4 large-4">
+                      <input id="title" type="text" name="title" placeholder="title">
+                    </div>
+                    <div class="columns medium-12 large-12">
+                      <textarea id="content" name="content" placeholder="Message Content Here"></textarea>
+                    </div>
+                    <input id="sendmessage" type="submit" class="button expanded" name="sendmessage" onclick="sendNotice()" value="Send Message">
+                  </div>
+                </form> 
+              </fieldset>
+            </div>
+          </div>
+          <div class="hide-for-small-only">
+            <div class="text-center">
+              <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- close wrapper, no more content after this -->
+    </div>
+  </div>
+
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/foundation/foundation.orbit.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var teacherinfo = sessionStorage.getItem('teacherdata');
+      var parsedinfo = JSON.parse(teacherinfo);
+      if (parsedinfo.photo == "") {
+        document.getElementById("profilephoto1").src = "default.png";
+        document.getElementById("profilephoto2").src = "default.png";
+      }else{
+        document.getElementById("profilephoto1").src = parsedinfo.photo;
+        document.getElementById("profilephoto2").src = parsedinfo.photo;
+      }
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      document.getElementById("sendmessage").addEventListener("click", function(event){
+          event.preventDefault()
+      })
+
+      //class dropdown list
+      $.ajax({
+        type: 'POST',
+        url: csserver+'classservice.php?cmd=1',
+        success: function(data)
+        {
+          var myclass = JSON.parse(data);
+          var classselect = document.getElementById("class");
+          option = document.createElement("option");
+          option.setAttribute('value', "");
+          option.appendChild(document.createTextNode("Class"));
+          classselect.appendChild(option);
+          for(var i = 0; i <= myclass.length; i++) {
+              option = document.createElement("option");
+              option.setAttribute('value', myclass[i].cno);
+              option.appendChild(document.createTextNode(myclass[i].cname));
+              classselect.appendChild(option);
+          }
+        }
+      });
+
+    });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    var teacherinfo = sessionStorage.getItem('teacherdata');
+    var parsedinfo = JSON.parse(teacherinfo);
+    var tid = parsedinfo.uid;
+    var schid = parsedinfo.schoolid;
+
+    //function to show error message if no class, topic or question number is selected.
+    function errorNotice() {
+      swal({
+        html: true,
+        title: 'Sorry', 
+        text: 'Choose a <b>Class</b>, <b>Title</b> and/or <b>Content</b>', 
+        type: 'error'}); 
+    }
+
+    //function to send old questions to be sent
+    function sendNotice() {
+      var topic = document.getElementById("title").value;
+      var vclass = document.getElementById("class").value;
+      var content = document.getElementById("content").value;
+
+      if((topic == "") || (vclass == "") || (content == "")){
+        errorNotice();
+      }else{
+        swal({
+          title: "Send Message?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax(
+              {
+                type: "POST",
+                url: csserver+"messageservice.php",
+                data: "cmd=1&title="+topic+"&content="+content+"&tid="+tid+"&clss="+vclass+"&schid="+schid,
+                success: function(data){
+                  swal({
+                    title: "Sent!",
+                    type: "success"
+                  },function(){ 
+                    location.reload();
+                  }
+                  );
+                }
+              });
+
+          }, 2000);
+        });
+      }
+    }
+
+    $('#logout1').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('teacherdata');
+        window.location.href = "index.html";
+      });
+
+    $('#logout2').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('teacherdata');
+        window.location.href = "index.html";
+      });
+
+    </script>
+
+  </body>
+</html>

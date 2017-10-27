@@ -1,0 +1,288 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grading</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+      <!-- off-canvas title bar for 'small' screen -->
+      <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+        <div class="title-bar-left">
+          <ul class="menu">
+            <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+          </ul>
+        </div>
+        <div class="title-bar-right">
+          <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+        </div>
+      </div>
+
+      <!-- off-canvas left menu -->
+      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+        <!-- Close button -->
+        <button class="close-button" aria-label="Close menu" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        <ul class="vertical dropdown menu" data-dropdown-menu>
+          <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+          <li><br></li>
+          <li><a class="hollowbutton button" href="teacherpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+          <li><a class="hollowbutton button" href="teachermessages.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+          <li><a class="hollowbutton button" href="teacherassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+          <li><a class="hollowbutton button" href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+          <li><a class="hollowbutton button" href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+          <li><br></br></li>
+          <li><br></br></li>
+          <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+        </ul>
+      </div>
+
+      <!-- "wider" top-bar menu for 'medium' and up -->
+      <div id="widemenu" class="widemenu callout primary medium head">
+        <div class="row columns small-12 medium-12 large-12">
+          <div class="columns small-4 medium-4 large-4">
+          <ul class="menu align-left">
+          <li><a href="teacherpage.html"><i class="icons fi-arrow-left"></i></a></li>
+            <li>
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <a href="#"><i class="icons fi-list"></i></a>
+                  <ul class="menu">
+                    <li><a href="teachermessages.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+                    <li><a href="teacherassignments.html"><i class="icons fi-list-thumbnails"></i><span>Assignments</span></a></li>
+                    <li><a href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+                    <li><a href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+          <div class="columns small-4 medium-4 large-4">
+            <ul class="menu-centered">
+              <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+            </ul>
+          </div>
+          <div class="columns small-4 medium-4 large-4">  
+          <ul class="menu align-right">
+            <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- original content goes in this container -->
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="widebody">  
+          <div class="innerwidebody">
+            <div class="callout">
+              <fieldset class="fieldset">
+                <legend>Grading</legend>
+                <div id="list" class="row columns medium-12"></div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="hide-for-small-only">
+            <div class="text-center">
+              <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- close wrapper, no more content after this -->
+    </div>
+  </div>
+
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/foundation/foundation.orbit.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var teacherinfo = sessionStorage.getItem('teacherdata');
+      var parsedinfo = JSON.parse(teacherinfo);
+      if (parsedinfo.photo == "") {
+        document.getElementById("profilephoto1").src = "default.png";
+        document.getElementById("profilephoto2").src = "default.png";
+      }else{
+        document.getElementById("profilephoto1").src = parsedinfo.photo;
+        document.getElementById("profilephoto2").src = parsedinfo.photo;
+      }
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      var id = parsedinfo.uid;
+      var schid = parsedinfo.schoolid;
+
+      jQuery.get(csserver+'classservice.php?cmd=7&id='+id+'&schid='+schid).done(function (lists) {
+        var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
+        var myclasses = JSON.parse(lists);
+        if (myclasses.length < 1) {
+          postlist+= '<li class="accordion-item" data-accordion-item><a class="accordion-title" href="#">No Assignment</a>';
+          postlist+= '<div class="accordion-content" data-tab-content>';
+          postlist+= '<h4><a id="answerbutton" class="hollow button expanded" href="#">No Assignment For Now</a></h4>';
+          postlist+= '</div>';
+          postlist+= '</li>';
+        }else{
+          for(var i = 0; i < myclasses.length; i++) {
+            postlist+= '<li class="accordion-item" data-accordion-item><a class="accordion-title" href="#" >'+myclasses[i].name+'</a>';
+            postlist+= '<div class="accordion-content" data-tab-content>';
+            postlist+= '<div class="row column small-12 medium-12 large-12">';
+            postlist+= '<div class="medium-6 large-6 text-center columns"><b>Assignments Submitted</b> - '+myclasses[i].num+'</div>';
+            postlist+= '<div id="showbutton'+i+'" class="medium-6 large-6 columns">';
+            postlist+= '<a class="hollow button expanded" href="#" onclick="swap('+i+','+myclasses[i].cno+')">Show List</a></div>';
+            postlist+= '<div id="showsbutton'+i+'" class="medium-6 large-6 columns" style="display:none"><a class="hollow button expanded" href="#" onclick="swapin('+i+','+myclasses[i].cno+')">Show List</a></div>';
+            postlist+= '<div id="hidebutton'+i+'" class="medium-6 large-6 columns" style="display:none"><a class="hollow button expanded" href="#" onclick="swapout('+i+','+myclasses[i].cno+')">Hide List</a></div>';
+            postlist+= '</div>';
+            postlist+= '<div id=assignlist'+i+'></div>';
+            postlist+= '</li>';
+          }
+        }
+        postlist+='</ul>';
+        jQuery('#list').html(postlist);
+
+      });
+
+      jQuery(document ).ajaxComplete( function($) {
+        jQuery(this).foundation();
+      });
+
+    });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    function swap(num,id){
+      $('#hidebutton'+num).show();
+      $('#showbutton'+num).hide();
+      createassign(num,id);
+
+    }
+
+    function swapin(num,id){
+      $('#hidebutton'+num).show();
+      $('#showsbutton'+num).hide();
+      showassign(num,id);
+
+    }
+
+    function swapout(num,id){
+      $('#hidebutton'+num).hide();
+      $('#showsbutton'+num).show();
+      hideassign(num,id);
+    }
+
+    function createassign(num,id) {
+      $.ajax({
+        type: 'POST',
+        url: csserver+'assignmentservice.php?cmd=13&clssid='+id,
+        success: function(data)
+        { 
+            var assignnames = JSON.parse(data);
+            var div = document.getElementById("assignlist"+num);
+            if (assignnames.length < 1) {
+              div1 = document.createElement("h1");
+              div1.setAttribute('id','h'+num+'h'+i);
+              div2 = document.createElement("a");
+              div2.setAttribute('id','answerbutton'+i);
+              div2.setAttribute('class','hollow button expanded');
+              div2.appendChild(document.createTextNode('No Assignment For Now'));
+              div1.appendChild(div2);
+              div.appendChild(div1);
+            }else{
+              for (var i = 0; i < assignnames.length; i++) {
+                div1 = document.createElement("h1");
+                div1.setAttribute('id','h'+assignnames[i].info[3]+'h'+i);
+                div2 = document.createElement("a");
+                div2.setAttribute('id','answerbutton'+i);
+                div2.setAttribute('class','hollow button expanded');
+                div2.setAttribute('onclick','markdirect('+assignnames[i].info[2]+','+assignnames[i].info[3]+')');
+                div2.appendChild(document.createTextNode('Mark '+assignnames[i].name+'\'s '+assignnames[i].info[0]+' Assignment'));
+                div1.appendChild(div2);
+                div.appendChild(div1);
+              } 
+            }
+        }
+      });  
+    }
+
+    function showassign(num,id) {
+      $.ajax({
+        type: 'POST',
+        url: csserver+'assignmentservice.php?cmd=13&clssid='+id,
+        success: function(data)
+        { 
+            var assignnames = JSON.parse(data);
+            var div = document.getElementById("assignlist"+num);
+            if (assignnames.length < 1) {
+              $('#h'+num+'h'+i).show();
+            }else{
+              for (var i = 0; i < assignnames.length; i++) {
+                $('#h'+assignnames[i].info[3]+'h'+i).show();
+              }
+            }
+        }
+      });
+    } 
+
+    function hideassign(num,id) {
+      $.ajax({
+        type: 'POST',
+        url: csserver+'assignmentservice.php?cmd=13&clssid='+id,
+        success: function(data)
+        { 
+            var assignnames = JSON.parse(data);
+            var div = document.getElementById("assignlist"+num);
+            if (assignnames.length < 1) {
+              $('#h'+num+'h'+i).hide();
+            }else{
+              for (var i = 0; i < assignnames.length; i++) {
+                $('#h'+assignnames[i].info[3]+'h'+i).hide();
+              }
+            }
+        }
+      });
+    }
+
+    function markdirect(info,stid) {
+      localStorage.setItem('stid', stid);
+      localStorage.setItem('questiondata', info);
+      window.location.href = "teachermark.html";
+    }
+
+    $('#logout1').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('teacherdata');
+        window.location.href = "index.html";
+      });
+
+    $('#logout2').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('teacherdata');
+        window.location.href = "index.html";
+      });
+
+    </script>
+
+  </body>
+</html>

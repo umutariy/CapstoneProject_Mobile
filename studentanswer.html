@@ -1,0 +1,301 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+        <!-- off-canvas title bar for 'small' screen -->
+        <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+          <div class="title-bar-left">
+            <ul class="menu">
+              <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+            </ul>
+          </div>
+          <div class="title-bar-right">
+            <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+          </div>
+        </div>
+
+        <!-- off-canvas left menu -->
+        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+          <!-- Close button -->
+          <button class="close-button" aria-label="Close menu" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          
+          <ul class="vertical dropdown menu" data-dropdown-menu>
+            <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+            <li><br></li>
+            <li><a id="back1" class="hollowbutton button" href="studentassignments.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+            <li><a class="hollowbutton button" href="studentnews.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+            <li><a class="hollowbutton button" href="studentpast.html"><i class="icons fi-list-bullet"></i><span>History</span></a></li>
+            <li><a class="hollowbutton button" href="studentreport.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+            <li><br></br></li>
+            <li><br></br></li>
+            <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+          </ul>
+        </div>
+
+        <!-- "wider" top-bar menu for 'medium' and up -->
+        <div id="widemenu" class="widemenu callout primary medium head">
+          <div class="row columns small-12 medium-12 large-12">
+            <div class="columns small-4 medium-4 large-4">
+            <ul class="menu align-left">
+              <li><a href="studentassignments.html"><i class="icons fi-arrow-left"></i></a></li>
+              <li>
+                <ul class="dropdown menu" data-dropdown-menu>
+                  <li>
+                    <a href="#"><i class="icons fi-list"></i></a>
+                    <ul class="menu">
+                      <li><a href="studentnews.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+                      <li><a href="studentpast.html"><i class="icons fi-list-bullet"></i><span>History</span></a></li>
+                      <li><a href="studentreport.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            </div>
+            <div class="columns small-4 medium-4 large-4">
+              <ul class="menu-centered">
+                <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+              </ul>
+            </div>
+            <div class="columns small-4 medium-4 large-4">  
+            <ul class="menu align-right">
+              <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+            </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- original content goes in this container -->
+        <div class="off-canvas-content" data-off-canvas-content>
+          <div class="widebody">  
+            <div class="innerwidebody">
+              <div class="callout">
+                <fieldset class="fieldset">
+                  <legend>Attempt</legend>
+                  <div id="" class="row columns">
+                    <div class="columns small-12 medium-12 large-12">
+                        <input id="title" type="text" name="title" placeholder="" disabled>
+                        <input id="tid" type="text" name="tid" placeholder="" style="display: none">
+                        <input id="assignnum" type="text" name="num" placeholder="" style="display: none">
+                        <input id="numofqs" type="text" name="num" placeholder="" style="display: none">
+                        <input id="description" type="text" name="description" placeholder="" style="display: none">
+                    </div>
+                    <div id="assignarea" class="row columns small-12 medium-12 large-12">
+                    </div>
+                    <div>
+                    <input id="finish" type="submit" class="button expanded" name="finish" onclick="submit()" value="Finish">
+                    </div>
+                  </div>
+                </fieldset>      
+              </div>  
+            </div>
+            <div class="hide-for-small-only">
+              <div class="text-center">
+                <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- close wrapper, no more content after this -->
+      </div>
+    </div>
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      document.getElementById("profilephoto1").src = parsedinfo.photo;
+      document.getElementById("profilephoto2").src = parsedinfo.photo;
+
+      var id = parsedinfo.uid;
+      var parents = parsedinfo.parents;
+      var questions = localStorage.getItem("questiondata");
+      var parsedquestions = JSON.parse(questions);
+
+      $('#back1').click(function(event){
+        event.preventDefault();
+        localStorage.removeItem('questiondata');
+        localStorage.removeItem('answersdata');
+        window.location.href = "studentassignments.html";
+      });
+
+    });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    $('#logout1').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('studentdata');
+      window.location.href = "index.html";
+    });
+
+    $('#logout2').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('studentdata');
+      window.location.href = "index.html";
+    });
+
+    var questions = localStorage.getItem("questiondata");
+    var parsedquestions = JSON.parse(questions);
+
+    //get assignment questions
+      $.ajax({
+        type: 'POST',
+        url: csserver+'assignmentservice.php',
+        data: 'cmd=3&assignmentnum='+parsedquestions,
+        success: function(data)
+        {
+          var myassignment = JSON.parse(data);
+          var assigndivs = document.getElementById("assignarea");
+          div1 = document.createElement("div");
+          div1.setAttribute('class', 'row');
+          div1.setAttribute('id', 'questionsarea');
+          document.getElementById("title").value = myassignment.tname;
+          document.getElementById("tid").value = myassignment.tid;
+          document.getElementById("assignnum").value = parsedquestions;
+          begin(myassignment.questionnos);
+          assigndivs.appendChild(div1);
+          var atype = myassignment.atype;
+          localStorage.setItem('atype', atype);
+        }
+      });
+
+      jQuery(document ).ajaxComplete( function($) {
+        jQuery(this).foundation();
+      });
+
+    //function to get all questions in the assignment
+    function begin(numbers){
+      jsonarray = JSON.stringify(numbers);
+      document.getElementById("numofqs").value = JSON.parse(jsonarray).length;
+        $.ajax({
+          type: 'POST',
+          url: csserver+'questionsgetservice.php',
+          data: 'number='+jsonarray,
+          success: function(data)
+          {
+            var myquestions = JSON.parse(data);
+            var solutionarray = [];
+            for (var i = 0; i < myquestions.length; i++) {
+              div2 = document.createElement("div");
+              div2.setAttribute('class', 'columns small-12 medium-12 large-12');
+              label = document.createElement("label");
+              label.appendChild(document.createTextNode('Question: '+myquestions[i].qcontent));
+              textarea = document.createElement("textarea");
+              textarea.setAttribute('id', 'solution'+i);
+              textarea.setAttribute('type', 'text');
+              textarea.setAttribute('class', 'answers');
+              textarea.setAttribute('name', 'answer[]');
+              textarea.setAttribute('placeholder', 'Type Answer Here');
+              input = document.createElement("input");
+              input.setAttribute('type', 'text');
+              input.setAttribute('id', 'quid'+i);
+              input.setAttribute('value', myquestions[i].qid);
+              input.setAttribute('style', 'display: none');
+              solutionarray.push(myquestions[i].answer);
+              label.appendChild(input);
+              label.appendChild(textarea);
+              div2.appendChild(label);
+              div1.appendChild(div2);
+            }
+             
+             localStorage.setItem('answersdata', JSON.stringify(solutionarray)); 
+          }
+        });
+
+      jQuery(document ).ajaxComplete( function($) {
+        jQuery(this).foundation();
+      });
+       
+    }
+
+    function submit(){
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      var answersinfo = localStorage.getItem('answersdata');
+      var parsedans = JSON.parse(answersinfo);
+      var atypeinfo = localStorage.getItem('atype');
+      var studentid = parsedinfo.uid;
+      var parents = parsedinfo.parents;
+      var tid = document.getElementById("tid").value;
+      var assid = document.getElementById("assignnum").value;
+      var solution =[];
+      var questionid = [];
+      var correctans = [];
+
+      var max = document.getElementById("numofqs").value;
+      for (var i = 0; i < max; i++) {
+        correctans.push(parsedans[i]);
+        solution.push(document.getElementById("solution"+i).value);
+        questionid.push(document.getElementById("quid"+i).value);      
+      }
+
+      jsoncorrectans = JSON.stringify(correctans);
+      jsonsolution = JSON.stringify(solution);
+      jsonquestionid = JSON.stringify(questionid);
+
+      swal({
+          title: "Submit?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax({
+              type: 'POST',
+              url: csserver+'answerservice.php',
+              data: 'cmd=2&solution='+jsonsolution+'&correctans='+jsoncorrectans+'&quid='+jsonquestionid+'&stid='+studentid+'&assid='+assid+'&tid='+tid+'&pid='+parents,
+              success: function(data)
+              {
+                swal({
+                  title: "Submitted!",
+                  type: "success"
+                },function(){ 
+                  window.location.href = "studentassignments.html";
+                });
+              }
+            });
+          }, 2000)
+        });
+      
+      localStorage.removeItem('answersdata');
+      localStorage.removeItem('questiondata');
+    }
+        
+    </script>
+    
+  </body>
+</html>

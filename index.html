@@ -1,0 +1,116 @@
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert2.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert2.js"></script>
+
+  </head>
+  <body>
+  <div>   
+    <div class="login">
+      <div id="message"></div>
+      <div class="login-icon-box">
+          <div class="circular" align=center>
+            <div class="login-text">
+              <br><br><br>
+              <form id="loginform" method="post" action="login.php">
+              <div class="fields">
+                <div class=" row columns small-12 medium-12 large-12">
+                  <input class="columns small-12 medium-12 large-12" id="username" type="text" placeholder="Username" name='username'>
+                  <input class="columns small-12 medium-12 large-12" id="password" type="password" placeholder="Password" name='password'>
+                  <div class="columns medium-12 large-12">
+                  <button id="submit" class="columns small-6 medium-6 large-6 button" type="submit" name="submit">Login</button>
+                  <button id="signup" class="columns small-6 medium-6 large-6 button" type="submit" name="signup">Signup</button>
+                  </div>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+      </div>
+        
+    </div>
+    
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      function error() {
+        swal({
+          title: 'Sorry', 
+          text: 'Wrong Information!', 
+          type: 'error',
+          animation: false,
+          customClass: 'animated tada'
+        }); 
+      }
+
+      function jsonsuccess(data){
+        swal({
+          title: 'Great', 
+          text: 'Logging In', 
+          type: 'success',
+          allowOutsideClick: false
+        }).then(function(){ 
+          if (data.level == 1) {
+            sessionStorage.setItem('admindata', JSON.stringify(data));
+            window.location.href = "adminpage.html";
+          }else if (data.level == 2) {
+            sessionStorage.setItem('studentdata', JSON.stringify(data));
+            window.location.href = "studentpage.html";
+          }else if (data.level == 3){
+            sessionStorage.setItem('teacherdata', JSON.stringify(data));
+            window.location.href = "teacherpage.html";
+          }else if (data.level == 4){
+            sessionStorage.setItem('parentdata', JSON.stringify(data));
+            window.location.href = "parentpage.html";
+          }
+        }); 
+      }
+
+      $('#submit').click(function(event) {
+        event.preventDefault();
+        var Login = "Login";
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var theurl = 'Login='+Login+'&username='+username+'&password='+password;
+
+        $.ajax({
+          type: 'POST',
+          url: csserver+'login.php',
+          data: theurl,
+          success: function(data)
+          {
+            var mydata = JSON.parse(data);
+            if (mydata) {
+              jsonsuccess(mydata);
+            }else{
+              error();
+            }
+          }
+        });
+      });
+
+      $('#signup').click(function(event) {
+        event.preventDefault();
+        window.location.href = "signup.html";
+      });
+
+    });
+    
+    </script>
+
+  </body>
+</html>   

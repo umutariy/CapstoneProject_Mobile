@@ -1,0 +1,46 @@
+.icons{
+   font-size:2rem;
+ }
+
+ .smallicons{
+   font-size:1rem;
+ }
+
+ .secondicons{
+   font-size:50px;
+ }
+ 
+.circularimage{
+  width: 75px;
+  height: 75px;
+  border-radius: 75px;
+  -webkit-border-radius: 75px;
+  -moz-border-radius: 70px;
+  box-shadow: 0 0 30px rgba(30,144,255, .9);
+  -webkit-box-shadow: 0 0 30px rgba(30,144,255, .9);
+  -moz-box-shadow: 0 0 30px rgba(30,144,255, .9);
+}
+
+.callout.primary.medium.head{
+  height:15%;
+  color:white;
+  background-image: url('../images/5.jpg');
+  background-size:cover;
+  margin:0 0;
+}
+
+footer{
+  height: 23%;
+  background-color: #222;
+  color: grey;
+  padding: 15px 0px;
+}
+
+footer label{
+  color: grey;
+}
+
+.panel.secondary.callout.medium.body{
+  min-height: 65%;
+  margin: 0 0;
+}

@@ -1,0 +1,490 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Assignments</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+      <!-- off-canvas title bar for 'small' screen -->
+      <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+        <div class="title-bar-left">
+          <ul class="menu">
+            <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+          </ul>
+        </div>
+        <div class="title-bar-right">
+          <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+        </div>
+      </div>
+
+      <!-- off-canvas left menu -->
+      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+        
+        <!-- Close button -->
+        <button class="close-button" aria-label="Close menu" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <ul class="vertical dropdown menu" data-dropdown-menu>
+          <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+          <li><br></li>
+          <li><a class="hollowbutton button" href="teacherpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+          <li><a class="hollowbutton button" href="teachermessages.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+          <li><a class="hollowbutton button" href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+          <li><a class="hollowbutton button" href="teachergrade.html"><i class="icons fi-filter"></i><span>Grading</span></a></li>
+          <li><a class="hollowbutton button" href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+          <li><br></br></li>
+          <li><br></br></li>
+          <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+        </ul>
+      </div>
+
+      <!-- "wider" top-bar menu for 'medium' and up -->
+      <div id="widemenu" class="widemenu callout primary medium head">
+        <div class="row columns medium-12 large-12">
+          <div class="columns medium-4 large-4">
+          <ul class="menu align-left">
+            <li><a href="teacherpage.html"><i class="icons fi-arrow-left"></i></a></li>
+            <li>
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <a href="#"><i class="icons fi-list"></i></a>
+                  <ul class="menu">
+                    <li><a href="teachermessages.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+                    <li><a href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+                    <li><a href="teachergrade.html"><i class="icons fi-list-thumbnails"></i><span>Grading</span></a></li>
+                    <li><a href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+          <div class="columns medium-4 large-4">
+          <ul class="menu-centered">
+            <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2"></a>
+          </ul>
+          </div>
+          <div class="columns medium-4 large-4">  
+          <ul class="menu align-right">
+            <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- original content goes in this container -->
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="widebody">  
+          <div class="innerwidebody">
+            <div class="callout">
+              <fieldset class="fieldset">
+                <legend>Create Assignments</legend>
+                <form>
+                  <div id="search" class="row columns small-12 medium-12 large-12">
+                    <div class="columns medium-3 large-3">
+                      <select id="class" name="class">
+                      </select>
+                    </div>
+                    <div class="columns medium-3 large-3">
+                      <select id="topic" name="topic">
+                      </select>
+                    </div>
+                    <div class="columns medium-2 large-2">
+                        <input id="noq" type="number" name="noq" placeholder="# of Questions">
+                    </div>
+                    <div class="columns medium-2 large-2">
+                    <input id="newlist" type="checkbox"><label>New Questions</label>
+                    </div>
+                    <div class="columns medium-2 large-2">
+                    <input id="automark" type="checkbox"><label>Auto Mark</label>
+                    </div>
+                    <input id="questionsearch" type="submit" class="button expanded" name="questionsearch" value="Continue">
+                    <input id="questionreload" type="submit" class="button expanded" name="questionreload" onclick="clearFields()" value="Back" style="display:none;">
+                  </div>
+                  <div class="row columns small-12 medium-12 large-12">
+                    <div id="questionold" action="" method="POST" style="display:none;">
+                    <div class="row column center">
+                      <div id="questionoptions" class="columns small-12 medium-12 large-12">           
+                      </div>
+                      <input type="submit" id="sendid" class="button expanded" name="submitroom" onclick="sendNotice()" value="Send Questions">
+                    </div>
+                    </div>
+                    <div id="questionnew" action="" nmethod="POST" style="display:none;">
+                      <div class="row column center">
+                        <div id="newquestionoptions">  
+                        </div>
+                      <input type="submit" id="createid" class="button expanded" name="submitfloor" onclick="newNotice()" value="Create Questions">
+                      </div>
+                    </div>
+                  </div>
+                </form> 
+              </fieldset> 
+            </div>    
+          </div>
+          <div class="hide-for-small-only">
+            <div class="text-center">
+              <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- close wrapper, no more content after this -->
+    </div>
+  </div>
+
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/foundation/foundation.orbit.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var teacherinfo = sessionStorage.getItem('teacherdata');
+      var parsedinfo = JSON.parse(teacherinfo);
+      document.getElementById("profilephoto1").src = parsedinfo.photo;
+      document.getElementById("profilephoto2").src = parsedinfo.photo;
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      document.getElementById("createid").addEventListener("click", function(event){
+          event.preventDefault()
+      });
+      document.getElementById("sendid").addEventListener("click", function(event){
+          event.preventDefault()
+      });
+
+      document.getElementById("questionsearch").addEventListener("click", function(event){
+          event.preventDefault()
+      });
+
+      document.getElementById("questionreload").addEventListener("click", function(event){
+          event.preventDefault()
+      });
+
+      //class dropdown list
+      $.ajax({
+          type: 'POST',
+          url: csserver+'classservice.php?cmd=1',
+          success: function(data)
+          {
+            var myclass = JSON.parse(data);
+            var classselect = document.getElementById("class");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Class"));
+            classselect.appendChild(option);
+            for(var i = 0; i <= myclass.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', myclass[i].cno);
+                option.appendChild(document.createTextNode(myclass[i].cname));
+                classselect.appendChild(option);
+            }
+          }
+        });
+
+      //topic dropdown list
+      $.ajax({
+          type: 'POST',
+          url: csserver+'topicservice.php',
+          success: function(data)
+          {
+            var mytopic = JSON.parse(data);
+            var topicselect = document.getElementById("topic");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Topic"));
+            topicselect.appendChild(option);
+            for(var i = 0; i <= mytopic.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', mytopic[i].tno);
+                option.appendChild(document.createTextNode(mytopic[i].tname));
+                topicselect.appendChild(option);
+            }
+          }
+        });
+
+    });
+
+    var teacherinfo = sessionStorage.getItem('teacherdata');
+    var parsedinfo = JSON.parse(teacherinfo);
+    var tid = parsedinfo.uid;
+    var schid = parsedinfo.schoolid;
+
+    //function to show error message if no class, topic or question number is selected.
+    function errorNotice() {
+      swal({
+        html: true,
+        title: 'Sorry', 
+        text: 'Choose a <b>Class</b>, <b>Topic</b> and/or <b>Number of Questions</b>', 
+        type: 'error'}); 
+    }
+
+    //function to send old questions to be sent
+    function sendNotice() {
+      var noq = document.getElementById("noq").value;
+      var topic = document.getElementById("topic").value;
+      var vclass = document.getElementById("class").value;
+      var qs = document.getElementsByName("questionnold[]");
+      var qarray = [];
+      if($('#automark').is(":checked")){
+        var atype = "1";
+      }else{
+        var atype = "2";
+      }
+      for(var i=0; i<qs.length; i++) {
+          qarray[i] = qs[i].value;
+      }
+
+      var questions = JSON.stringify(qarray);
+
+      swal({
+        html: true,
+        title: "Description",
+        text: "Please write a little description:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "Write something"
+      },
+      function(inputValue){
+        if (inputValue === false) return false;
+        
+        if (inputValue === "") {
+          swal.showInputError("You need to write something!");
+          return false
+        }
+        
+        swal({
+          title: "Send?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax(
+              {
+                type: "POST",
+                url: csserver+"assignmentservice.php",
+                data: "cmd=6&desc="+inputValue+"&noq="+noq+"&topic="+topic+"&class="+vclass+"&questions="+questions+"&tid="+tid+"&schid="+schid+"&atype="+atype,
+                success: function(data){
+                  swal({
+                    title: "Sent!",
+                    type: "success"
+                  },function(){ 
+                    location.reload();
+                  }
+                  );
+                }
+              });
+
+          }, 2000);
+        });
+      });
+    }
+
+    //function to create new questions to be sent
+    function newNotice() {
+      var noq = document.getElementById("noq").value;
+      var topic = document.getElementById("topic").value;
+      var vclass = document.getElementById("class").value;
+      var qs = document.getElementsByName("questionnnew[]");
+      var as = document.getElementsByName("answernew[]");
+      if($('#automark').is(":checked")){
+        var atype = "1";
+      }else{
+        var atype = "2";
+      }
+      var qarray = [];
+      var aarray = [];
+      for(var i=0; i<qs.length; i++) {
+          qarray[i] = qs[i].value;
+          aarray[i] = as[i].value;
+      }
+
+      var questions = JSON.stringify(qarray);
+      var answers = JSON.stringify(aarray);
+
+      swal({
+        html: true,
+        title: "Description",
+        text: "Please write a little description:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "Write something"
+      },
+      function(inputValue){
+        if (inputValue === false) return false;
+        
+        if (inputValue === "") {
+          swal.showInputError("You need to write something!");
+          return false
+        }
+        
+        swal({
+          title: "Send?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax(
+              {
+                type: "POST",
+                url: csserver+"assignmentservice.php",
+                data: "cmd=5&desc="+inputValue+"&noq="+noq+"&topic="+topic+"&class="+vclass+"&questions="+questions+"&answers="+answers+"&tid="+tid+"&schid="+schid+"&atype="+atype,
+                success: function(data){
+                  swal({
+                    title: "Sent!",
+                    type: "success"
+                  },function(){ 
+                    location.reload();
+                  }
+                  );
+                }
+              });
+
+          }, 2000);
+        });
+      });
+    }
+
+    function clearFields(){
+      $('#newquestionoptions').empty();
+      $('#questionnew').hide();
+      $('#questionoptions').empty();
+      $("#questionold").hide();
+      $("#questionsearch").show();
+      $("#questionreload").hide();
+    }
+
+    //defining the function on the first button click
+    document.getElementById("questionsearch").onclick = function() {
+      newResult()
+    };
+
+    function newResult(){
+      var noq = document.getElementById("noq").value;
+      var clss = document.getElementById("class").value;
+      var topic = document.getElementById("topic").value;
+      if($('#automark').is(":checked")){
+        var atype = "1";
+      }else{
+        var atype = "2";
+      }
+
+      if (clss == "") {
+        document.getElementById("class").focus();
+        errorNotice();
+      }else if(topic == ""){
+        document.getElementById("topic").focus();
+        errorNotice();
+      }else if(noq == 0){
+        document.getElementById("noq").focus();
+        errorNotice();
+      }else{//generating new questions options
+        $("#questionsearch").hide();
+        $("#questionreload").show();
+        if($('#newlist').is(":checked")){
+          $("#questionnew").show();
+          $("#questionold").hide();
+          var newquestiondivs = document.getElementById("newquestionoptions");
+          for(var i = 0; i < noq; i++) {
+            div1 = document.createElement("div");
+            div1.setAttribute('class', 'columns small-10 medium-10 large-10');
+            input1 = document.createElement("input");
+            input1.setAttribute('id', 'questionn'+i);
+            input1.setAttribute('type', 'text');
+            input1.setAttribute('class', 'newquestions');
+            input1.setAttribute('name', 'questionnnew[]');
+            input1.setAttribute('placeholder', 'Type Question Here');
+            div1.appendChild(input1);
+            div2 = document.createElement("div");
+            div2.setAttribute('class', 'columns small-2 medium-2 large-2');
+            input2 = document.createElement("input");
+            input2.setAttribute('id', 'answern'+i);
+            input2.setAttribute('type', 'text');
+            input2.setAttribute('class', 'newanswers');
+            input2.setAttribute('name', 'answernew[]');
+            input2.setAttribute('placeholder', 'Type Answer');
+            div2.appendChild(input2);
+            newquestiondivs.appendChild(div1);
+            newquestiondivs.appendChild(div2);
+          }
+        }else{//generating old questions select option
+          var stopic = document.getElementById("topic").value;
+          $("#questionnew").hide();
+          $("#questionold").show();
+
+          $.ajax({
+            type: 'POST',
+            url: csserver+'questionsservice.php',
+            data: 'criteria='+stopic,
+            success: function(data)
+            {
+              var myquestions = JSON.parse(data);
+              var questiondivs = document.getElementById("questionoptions");
+              for(var i = 0; i < noq; i++) {
+                select = document.createElement("select");
+                select.setAttribute('id', 'question'+i);
+                select.setAttribute('name', 'questionnold[]');
+                option = document.createElement("option");
+                option.setAttribute('value', "");
+                option.appendChild(document.createTextNode("Select Question"));
+                select.appendChild(option);
+                for(var j = 0; j < myquestions.length; j++) {
+                  option = document.createElement("option");
+                  option.setAttribute('value', myquestions[j].qid);
+                  option.appendChild(document.createTextNode(myquestions[j].qcontent));
+                  select.appendChild(option);
+                }
+                questiondivs.appendChild(select);
+              }
+            }
+          }); 
+        }
+      }
+         
+    }
+
+    $('#logout1').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('teacherdata');
+        window.location.href = "index.html";
+      });
+
+    $('#logout2').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('teacherdata');
+        window.location.href = "index.html";
+      });
+
+    </script>
+
+  </body>
+</html>

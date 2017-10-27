@@ -1,0 +1,348 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Child View</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+<div class="off-canvas-wrapper">
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+    <!-- off-canvas title bar for 'small' screen -->
+    <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+      <div class="title-bar-left">
+        <ul class="menu">
+          <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+        </ul>
+      </div>
+      <div class="title-bar-right">
+        <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+      </div>
+    </div>
+
+    <!-- off-canvas left menu -->
+    <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+      <!-- Close button -->
+      <button class="close-button" aria-label="Close menu" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <ul class="vertical dropdown menu" data-dropdown-menu>
+
+        <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+        <li><br></li>
+        <li><a class="hollowbutton button" href="parentpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+        <li><a class="hollowbutton button" href="parentassignments.html"><i class="icons fi-list-thumbnails"></i><span>Assignments</span></a></li>
+        <li><a class="hollowbutton button" href="parentrecords.html"><i class="icons fi-results"></i><span>Records</span></a></li>
+        <li><br></br></li>
+        <li><br></br></li>
+        <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+      </ul>
+    </div>
+
+    <!-- "wider" top-bar menu for 'medium' and up -->
+    <div id="widemenu" class="widemenu callout primary medium head">
+      <div class="row columns small-12 medium-12 large-12">
+        <div class="columns small-4 medium-4 large-4">
+        <ul class="menu align-left">
+          <li><a href="parentpage.html"><i class="icons fi-arrow-left"></i></a></li>
+          <li>
+            <ul class="dropdown menu" data-dropdown-menu>
+              <li>
+                <a href="#"><i class="icons fi-list"></i></a>
+                <ul class="menu">
+                  <li><a href="parentassignments.html"><i class="icons fi-list-thumbnails"></i><span>Assignments</span></a></li>
+                  <li><a href="parentrecords.html"><i class="icons fi-results"></i><span>Records</span></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        </div>
+        <div class="columns small-4 medium-4 large-4">
+        <ul class="menu-centered">
+          <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2"></a>
+        </ul>
+        </div>
+        <div class="columns small-4 medium-4 large-4">  
+        <ul class="menu align-right">
+          <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- original content goes in this container -->
+    <div class="off-canvas-content" data-off-canvas-content>
+      <div class="widebody">  
+        <div class="innerwidebody">
+          <div class="callout">
+            <fieldset class="fieldset">
+              <legend>Add Children</legend>
+              <div id="list" class="row columns small-12 medium-12 large-12">
+                <div class="columns medium-6 large-6">
+                  <select id="class" name="class" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
+                  </select>
+                </div>
+                <div class="medium-6 large-6 columns">
+                  <select id="selectchildren">
+                  </select>
+                </div>
+              </div>
+              <div class="row columns small-12 medium-12 large-12">
+                <a href="#" class="expanded button" onclick="add()">Add Child/Children</a>
+              </div>
+            </fieldset>
+            <br>
+            <div id="create" class="row column small-12 medium-12 large-12">
+            <!-- adding children over here -->
+              <div id="addclass" class="row">
+                <div id="classlist" class="row">
+                  <table id="childrenlist">
+                    <thead>
+                      <tr>
+                        <th width="80">Name</th>
+                        <th width="200">Class</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="listview">
+                      <tr>
+                        <td class="text-center"><a href="#"><i id="remove1" class="icons fi-x"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>            
+              </div>
+            </div> 
+          </div>        
+        </div>
+        <div class="hide-for-small-only">
+          <div class="text-center">
+            <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- close wrapper, no more content after this -->
+  </div>
+</div>
+
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var parentinfo = sessionStorage.getItem('parentdata');
+      var parsedinfo = JSON.parse(parentinfo);
+      document.getElementById("profilephoto1").src = parsedinfo.photo;
+      document.getElementById("profilephoto2").src = parsedinfo.photo;
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      var id = parsedinfo.uid;
+      var schid = parsedinfo.schoolid;
+      var chi = parsedinfo.children;
+
+      jQuery.get(csserver+'usersservice.php?cmd=11&id='+id+'&chi='+chi).done(function (lists) {
+        var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
+        var myusers = JSON.parse(lists);
+        if (myusers.length < 1) {
+          postlist+= '<tr>';
+          postlist+= '<td>No Child</td>';
+          postlist+= '</tr>';
+        }else{
+          var j= 1;
+          for(var i = 0; i < myusers.length; i++) {
+            postlist+= '<tr>';
+            postlist+= '<td>'+myusers[i].name+'</td>';
+            postlist+= '<td>'+myusers[i].class+'</td>';
+            postlist+= '<td><a id="deletebutton" class="" href="#" onclick="remove('+id+','+myusers[i].id+')">Remove</a></td>';
+            postlist+= '</tr>';
+            j++;
+          }
+        }
+        postlist+='</ul>';
+        jQuery('#listview').html(postlist);
+
+      });
+
+      jQuery(document ).ajaxComplete( function($) {
+        jQuery(this).foundation();
+      });
+
+      //class dropdown list
+      $.ajax({
+          type: 'POST',
+          url: csserver+'classservice.php?cmd=1',
+          success: function(data)
+          {
+            var myclass = JSON.parse(data);
+            var classselect = document.getElementById("class");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Select Class"));
+            classselect.appendChild(option);
+            for(var i = 0; i <= myclass.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', myclass[i].cno);
+                option.appendChild(document.createTextNode(myclass[i].cname));
+                classselect.appendChild(option);
+            }
+          }
+        });
+
+    });
+
+    var parentinfo = sessionStorage.getItem('parentdata');
+    var parsedinfo = JSON.parse(parentinfo);
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    var schid = parsedinfo.schoolid;
+    var id = parsedinfo.uid;
+
+    function dynamicdropdown(listindex){ 
+      $('#selectchildren').find('option').remove().end();
+      var grade = listindex;
+      //student dropdown list
+      $.ajax({
+        type: 'POST',
+        url: csserver+'usersservice.php?cmd=4&grade='+grade+'&schid='+schid,
+        success: function(data)
+        {
+          var myclass = JSON.parse(data);
+          var classselect = document.getElementById("selectchildren");
+          option = document.createElement("option");
+          option.setAttribute('value', "");
+          option.appendChild(document.createTextNode("Select Children"));
+          classselect.appendChild(option);
+          for(var i = 0; i <= myclass.length; i++) {
+              option = document.createElement("option");
+              option.setAttribute('value', myclass[i].id);
+              option.appendChild(document.createTextNode(myclass[i].name));
+              classselect.appendChild(option);
+          }
+        }
+      });
+    }
+
+    function errorNotice() {
+      swal({
+        html: true,
+        title: 'Sorry', 
+        text: 'Check <b>All Fields</b> please', 
+        type: 'error'}); 
+    }
+
+    function add(){
+      var clss = document.getElementById("class").value;
+      var chi = document.getElementById("selectchildren").value;
+
+      if (clss == "") {
+        errorNotice()
+      }else if(chi == ""){
+        errorNotice()
+      }else{
+        swal({
+          title: "Add?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax(
+              {
+                type: "POST",
+                url: csserver+"usersservice.php",
+                data: "cmd=10&id="+id+"&chi="+chi,
+                success: function(data){
+                  swal({
+                    title: "Child Added!",
+                    type: "success"
+                  },function(){ 
+                    location.reload();
+                  }
+                  );
+                }
+              });
+
+          }, 2000);
+        });
+      }  
+    }
+
+    function remove(id,chi){
+      swal({
+        title: "Remove Student?",
+        type: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      },
+      function(){
+        setTimeout(function(){
+          $.ajax(
+            {
+              type: "POST",
+              url: csserver+"usersservice.php",
+              data: "cmd=14&id="+id+"&chi="+chi,
+              success: function(data){
+                swal({
+                  title: "Child removed!",
+                  type: "success"
+                },function(){ 
+                  location.reload();
+                }
+                );
+              }
+            });
+
+        }, 1000);
+      });  
+    }
+
+    function more(){
+      if($('#moreselect').is(":checked")){
+        $("#moreclass").show();
+        $("#oneclass").hide();
+      }else{
+        $("#oneclass").show();
+        $("#moreclass").hide();
+      }
+    }
+
+    $('#logout1').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('parentdata');
+        window.location.href = "index.html";
+      });
+
+    $('#logout2').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('parentdata');
+        window.location.href = "index.html";
+      });
+
+    </script>
+
+  </body>
+</html>

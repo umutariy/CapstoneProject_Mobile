@@ -1,0 +1,93 @@
+a{
+ color: white; 
+}
+.button{
+  color: black;
+  background-color:transparent;
+}
+.circular {
+  width: 250px;
+  height: 250px;
+  border-radius: 280px;
+  background-color:rgba(112,128,144, 0.5);
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 150px;
+  box-shadow: 0 0 20px rgba(4, 17, 22, .9);
+  -webkit-box-shadow: 0 0 20px rgba(4, 17, 22, .9);
+  -moz-box-shadow: 0 0 20px rgba(4, 17, 22, .9);
+}
+
+.fieldset{
+  background-color:rgba(112,128,144, 0.5);
+  box-shadow: 0 0 20px rgba(4, 17, 22, .9);
+}
+
+body{
+  width:100%;
+  height:90%;
+  background-image:url('../images/b5.jpg');
+  background-repeat:no-repeat;
+  background-size:cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.images/1.jpg',sizingMethod='scale');
+  -ms-filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/1.jpg',sizingMethod='scale')";
+}
+.icons{
+   font-size:40px;
+ }
+.login {
+  width: 100%;
+  height: 50%;
+  margin: 80px 0;
+  text-align: center;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}
+.login .login-icon-box {
+  position: relative;
+  top: 30%;
+  display: inline-block;
+  margin-bottom: 40px;
+  padding: 10px;
+  background: transparent;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}
+.login .login-text{
+  width: 80%;
+  position: relative;
+}
+.login .fields{
+  width: 100%;
+  position: relative;
+}
+.login .login-description {
+  width: 40%;
+  margin: 0 auto;
+  opacity: 0;
+  -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0); 
+}
+.signup {
+  width: 100%;
+  height: 10%;
+  margin: 40px 0;
+  text-align: center;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}
+.signup .signup-box {
+  position: relative;
+  top: 30%;
+  display: inline-block;
+  margin-bottom: 40px;
+  padding: 10px;
+  background: transparent;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease; 
+}

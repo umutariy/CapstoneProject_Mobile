@@ -1,0 +1,567 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Users</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.foundation.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTable.style.css">
+    <link rel="stylesheet" type="text/css" href="css/rowReorder.dataTables.min.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery-2.2.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.foundation.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.rowReorder.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/responsive.foundation.min.js"></script>
+  </head>
+  <body>
+<div class="off-canvas-wrapper">
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+    <!-- off-canvas title bar for 'small' screen -->
+    <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+      <div class="title-bar-left">
+        <ul class="menu">
+          <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+        </ul>
+      </div>
+      <div class="title-bar-right">
+        <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+      </div>
+    </div>
+
+    <!-- off-canvas left menu -->
+    <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+      <!-- Close button -->
+      <button class="close-button" aria-label="Close menu" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <ul class="vertical dropdown menu" data-dropdown-menu>
+
+        <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+        <li><br></br></li>
+        <li><a class="hollowbutton button" href="adminpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+        <li><a class="hollowbutton button" href="adminschools.html"><i class="icons fi-home"></i><span>Schools & Classes</span></a></li>
+        <li><br></br></li>
+        <li><br></br></li>
+        <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+      </ul>
+    </div>
+
+    <!-- "wider" top-bar menu for 'medium' and up -->
+    <div id="widemenu" class="widemenu callout primary medium head">
+      <div class="row columns small-12 medium-12 large-12">
+        <div class="columns small-4 medium-4 large-4">
+        <ul class="menu align-left">
+          <li><a href="adminpage.html"><i class="icons fi-arrow-left"></i></a></li>
+          <li>
+            <ul class="dropdown menu" data-dropdown-menu>
+              <li>
+                <a href="#"><i class="icons fi-list"></i></a>
+                <ul class="menu">
+                  <li><a href="adminschools.html"><i class="icons fi-home"></i><span>Schools & Classes</span></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        </div>
+        <div class="columns small-4 medium-4 large-4">
+        <ul class="menu-centered">
+          <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+        </ul>
+        </div>
+        <div class="columns small-4 medium-4 large-4">  
+        <ul class="menu align-right">
+          <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- original content goes in this container -->
+    <div class="off-canvas-content" data-off-canvas-content>
+      <div class="widebody">  
+        <div class="innerwidebody">
+          <div class="callout">
+          	<fieldset class="large-12 medium-12 columns">
+      			  <label>Choose Users to Add
+      				  <select id="userlist" onchange="userchoice()">
+      				  	<option value="0">Select Users</option>
+      				    <option value="1">Administrator</option>
+      				    <option value="3">Teacher</option>
+      				    <option value="2">Student</option>
+      				    <option value="4">Parent</option>
+      				  </select>
+      				</label>
+			      </fieldset>
+            <fieldset id="useraddfield" class="fieldset">
+              <legend>Add <b>User</b></legend>
+              <div id="list" class="row columns small-12 medium-12 large-12">
+            	<div class="medium-2 large-2 columns">
+                  <input id="fname" type="text" placeholder="First Name">
+                </div>
+                <div class="medium-2 large-2 columns">
+                  <input id="lname" type="text" placeholder="Last Name">
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <select id="school">
+                  </select>
+                </div>
+                <div id="selectmore" class="medium-2 large-2 columns">
+                  <input id="moreselect" type="checkbox" onclick="more()"><label for="moreselect">Many Classes</label>
+                </div>
+                <div id="oneclass" class="medium-2 large-2 columns">
+                  <select id="singleclass">
+                  </select>
+                  <p class="help-text" id="singleclasshelp">Select one class</p>
+                </div>
+                <div id="moreclass" class="medium-2 large-2 columns" style="display: none">
+                  <select multiple id="multiclass">
+                  </select>
+                  <p class="help-text" id="multiclasshelp">Select multiple if needed</p>
+                </div> 
+              </div>
+              <div class="row columns small-12 medium-12 large-12">
+                <a id="adduser" href="#" class="expanded button">Add User</a>
+              </div>
+            </fieldset>
+            <br>
+            <!-- users content over here -->
+            <div id="view">
+              	<div class="row column">
+              		<ul class="tabs" data-tabs id="example-tabs">
+        					  <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Admins</a></li>
+        					  <li class="tabs-title"><a href="#panel2">Teachers</a></li>
+        					  <li class="tabs-title"><a href="#panel3">Students</a></li>
+        					  <li class="tabs-title"><a href="#panel4">Parents</a></li>
+        					</ul>
+        					<div class="tabs-content" data-tabs-content="example-tabs">
+        					  <div class="tabs-panel is-active" id="panel1">
+        					    <table id="adminlist"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        		                  <thead>
+        		                      <tr>
+        		                      	  <th>Name</th>
+        		                          <th>School</th>
+        		                      </tr>
+        		                  </thead>
+        		                </table>
+        					  </div>
+        					  <div class="tabs-panel" id="panel2">
+        					    <table id="teachlist"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        		                  <thead>
+        		                      <tr>
+        		                      	  <th>Name</th>
+        		                          <th>School</th>
+        		                      </tr>
+        		                  </thead>
+        		                </table>
+        					  </div>
+        					  <div class="tabs-panel" id="panel3">
+        					    <table id="studlist"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        		                  <thead>
+        		                      <tr>
+        		                      	  <th>Name</th>
+        		                          <th>School</th>
+        		                      </tr>
+        		                  </thead>
+        		                </table>
+        					  </div>
+        					  <div class="tabs-panel" id="panel4">
+        					    <table id="parlist"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        		                  <thead>
+        		                      <tr>
+        		                      	  <th>Name</th>
+        		                          <th>School</th>
+        		                      </tr>
+        		                  </thead>
+        		                </table>
+        					  </div>
+        					</div>
+		                
+              	</div>
+            </div> 
+          </div>
+        </div>
+        <div class="hide-for-small-only">
+          <div class="text-center">
+            <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- close wrapper, no more content after this -->
+  </div>
+</div>
+
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var admininfo = sessionStorage.getItem('admindata');
+      var parsedinfo = JSON.parse(admininfo);
+      document.getElementById("profilephoto1").src = parsedinfo.photo;
+      document.getElementById("profilephoto2").src = parsedinfo.photo;
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      //single class dropdown list
+      $.ajax({
+        type: 'POST',
+        url: csserver+'classservice.php?cmd=1',
+        success: function(data)
+        {
+          var myclass = JSON.parse(data);
+          var classselect1 = document.getElementById("singleclass");
+          option = document.createElement("option");
+          option.setAttribute('value', "");
+          option.appendChild(document.createTextNode("Select Class"));
+          classselect1.appendChild(option);
+          for(var i = 0; i <= myclass.length; i++) {
+              option = document.createElement("option");
+              option.setAttribute('value', myclass[i].cno);
+              option.appendChild(document.createTextNode(myclass[i].cname));
+              classselect1.appendChild(option);
+          }
+        }
+      });
+
+      //multiple class dropdown list
+      $.ajax({
+        type: 'POST',
+        url: csserver+'classservice.php?cmd=1',
+        success: function(data)
+        {
+          var myclass = JSON.parse(data);
+          var classselect2 = document.getElementById("multiclass");
+          for(var i = 0; i <= myclass.length; i++) {
+              option = document.createElement("option");
+              option.setAttribute('value', myclass[i].cno);
+              option.appendChild(document.createTextNode(myclass[i].cname));
+              classselect2.appendChild(option);
+          }
+        }
+      });
+
+      //school dropdown list
+      $.ajax({
+          type: 'POST',
+          url: csserver+'schoolservice.php?cmd=1',
+          success: function(data)
+          {
+            var myschool = JSON.parse(data);
+            var schoolselect = document.getElementById("school");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Select School"));
+            schoolselect.appendChild(option);
+            for(var i = 0; i <= myschool.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', myschool[i].SID);
+                option.appendChild(document.createTextNode(myschool[i].SCHOOL_NAME));
+                schoolselect.appendChild(option);
+            }
+          }
+        });
+
+    });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    //defining the function on the add button click
+    document.getElementById("adduser").onclick = function() {
+      var usr = document.getElementById("userlist").value;
+      if (usr == 0) {
+        $('#userlist').focus();
+        firsterrorNotice();
+      }else{
+        newUser();
+      }
+    };
+
+    //function to show error message if no user is selected before adding.
+    function firsterrorNotice() {
+
+      swal({
+        html: true,
+        title: 'Sorry', 
+        text: 'Please choose user type to be added first', 
+        type: 'warning'}); 
+    }
+
+    //function to show error message if no name, class or school is selected.
+    function errorNotice() {
+      swal({
+        html: true,
+        title: 'Sorry', 
+        text: 'Check <b>All</b> the fields', 
+        type: 'warning'}); 
+    }
+
+    //function to add a new user
+    function newUser(){
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var sch = document.getElementById("school").value;
+        if ($('#moreselect').is(":checked")) {
+          var clss =$("#multiclass").val();
+        }else{
+          var clss = document.getElementById("singleclass").value;
+        }
+
+	  	var usr = document.getElementById("userlist").value;
+	    if (usr == 1) {
+	        if(fname == ""){
+            $('#fname').focus();
+		        errorNotice();
+		    }else if(lname == ""){
+            $('#lname').focus();
+		        errorNotice();
+		    }else if(sch == ""){
+            $('#school').focus();
+		        errorNotice();
+		    }else{
+				$.ajax({
+			        type: 'POST',
+			        url: csserver+'usersservice.php?cmd=1&fname='+fname+'&lname='+lname+'&sch='+sch+'&lvl='+usr,
+			        success: function(data)
+			          {
+			            swal({
+			              title: "Added!",
+			              type: "success"
+			            },function(){ 
+			              window.location.href = "adminusers.html";
+			            });
+			          }
+			    });
+			}
+	    }else if(usr == 2){
+	    	if (clss == "") {
+	            errorNotice();
+	        }else if(fname == ""){
+	            errorNotice();
+	        }else if(lname == ""){
+	            errorNotice();
+	        }else if(sch == ""){
+	            errorNotice();
+	        }else{
+			    $.ajax({
+			        type: 'POST',
+			        url: csserver+'usersservice.php?cmd=2&fname='+fname+'&lname='+lname+'&sch='+sch+'&clss='+clss+'&lvl='+usr,
+			        success: function(data)
+			          {
+			            swal({
+			              title: "Added!",
+			              type: "success"
+			            },function(){ 
+			              window.location.href = "adminusers.html";
+			            });
+			          }
+			    });
+		    }
+	    }else if(usr == 3){
+	    	if (clss == "") {
+	            errorNotice();
+	        }else if(fname == ""){
+	            errorNotice();
+	        }else if(lname == ""){
+	            errorNotice();
+	        }else if(sch == ""){
+	            errorNotice();
+	        }else{
+		    	$.ajax({
+			        type: 'POST',
+			        url: csserver+'usersservice.php?cmd=2&fname='+fname+'&lname='+lname+'&sch='+sch+'&clss='+clss+'&lvl='+usr,
+			        success: function(data)
+			          {
+			            swal({
+			              title: "Added!",
+			              type: "success"
+			            },function(){ 
+			              window.location.href = "adminusers.html";
+			            });
+			          }
+			    });
+		    }
+	    }else if(usr == 4){
+	    	if(fname == ""){
+		        errorNotice();
+		    }else if(lname == ""){
+		        errorNotice();
+		    }else if(sch == ""){
+		        errorNotice();
+		    }else{
+		    	$.ajax({
+			        type: 'POST',
+			        url: csserver+'usersservice.php?cmd=1&fname='+fname+'&lname='+lname+'&sch='+sch+'&lvl='+usr,
+			        success: function(data)
+			          {
+			            swal({
+			              title: "Added!",
+			              type: "success"
+			            },function(){ 
+			              window.location.href = "adminusers.html";
+			            });
+			          }
+			      });
+			    }
+		    }
+	    }      
+
+    //function to show more option
+    function more(){
+      if($('#moreselect').is(":checked")){
+        $("#moreclass").show();
+        $("#oneclass").hide();
+      }else{
+        $("#oneclass").show();
+        $("#moreclass").hide();
+      }
+    }
+
+    function userchoice(){
+    	var usr = document.getElementById("userlist").value;
+    	if (usr == 0) {
+    		document.getElementById("fname").value="";
+	        document.getElementById("lname").value="";
+	        document.getElementById("school").value="";
+	        document.getElementById("singleclass").value="";
+	    }else if (usr == 1) {
+	        $("#oneclass").hide();
+	        $("#selectmore").hide();
+	        document.getElementById("fname").value="";
+	        document.getElementById("lname").value="";
+	        document.getElementById("school").value="";
+	        document.getElementById("singleclass").value="";
+	    }else if(usr == 2){
+	    	$("#oneclass").show();
+	    	$("#selectmore").show();
+	    	document.getElementById("fname").value="";
+	        document.getElementById("lname").value="";
+	        document.getElementById("school").value="";
+	        document.getElementById("singleclass").value="";
+	    }else if(usr == 3){
+	    	$("#selectmore").hide();
+	    	$("#oneclass").show();
+	    	document.getElementById("fname").value="";
+	        document.getElementById("lname").value="";
+	        document.getElementById("school").value="";
+	        document.getElementById("singleclass").value="";
+	    }else if(usr == 4){
+	    	$("#oneclass").hide();
+	    	$("#selectmore").hide();
+	    	document.getElementById("fname").value="";
+	        document.getElementById("lname").value="";
+	        document.getElementById("school").value="";
+	        document.getElementById("singleclass").value="";
+	    }
+    }	
+
+    $('#logout1').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('admindata');
+        window.location.href = "index.html";
+      });
+
+    $('#logout2').click(function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('admindata');
+        window.location.href = "index.html";
+      });
+
+    </script>
+
+    <script type="text/javascript" language="javascript" >
+
+      $(document).ready(function() {
+        var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+        var dataTable = $('#adminlist').DataTable( {
+          "responsive": true,
+          "order":[[0,"desc"]],
+          "processing": true,
+          "serverSide": true,
+          "ajax":{
+              url :csserver+"usersdataadmin.php", // json datasource
+              type: "post",  // method  , by default get
+              error: function(){  // error handling
+                  $(".users-error").html("");
+                  $("#users").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+                  $("#users_processing").css("display","none");             
+              }
+	          }
+	      });
+
+	      var dataTable = $('#teachlist').DataTable( {
+	          "responsive": true,
+	          "order":[[0,"desc"]],
+	          "processing": true,
+	          "serverSide": true,
+	          "ajax":{
+	              url :csserver+"usersdatateachers.php", // json datasource
+	              type: "post",  // method  , by default get
+	              error: function(){  // error handling
+	                  $(".users-error").html("");
+	                  $("#users").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+	                  $("#users_processing").css("display","none");             
+	              }
+	          }
+	      });
+
+	      var dataTable = $('#studlist').DataTable( {
+	          "responsive": true,
+	          "order":[[0,"desc"]],
+	          "processing": true,
+	          "serverSide": true,
+	          "ajax":{
+	              url :csserver+"usersdatastudents.php", // json datasource
+	              type: "post",  // method  , by default get
+	              error: function(){  // error handling
+	                  $(".users-error").html("");
+	                  $("#users").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+	                  $("#users_processing").css("display","none");             
+	              }
+	          }
+	      });
+
+	      var dataTable = $('#parlist').DataTable( {
+	          "responsive": true,
+	          "order":[[0,"desc"]],
+	          "processing": true,
+	          "serverSide": true,
+	          "ajax":{
+	              url :csserver+"usersdataparents.php", // json datasource
+	              type: "post",  // method  , by default get
+	              error: function(){  // error handling
+	                  $(".users-error").html("");
+	                  $("#users").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+	                  $("#users_processing").css("display","none");             
+	              }
+	          }
+	      });
+      } );
+  </script>
+
+  </body>
+</html>

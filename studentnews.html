@@ -1,0 +1,205 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.foundation.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTable.style.css">
+    <link rel="stylesheet" type="text/css" href="css/rowReorder.dataTables.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/responsive.dataTables.min.css"> -->
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery-2.2.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.foundation.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.rowReorder.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/responsive.foundation.min.js"></script>
+
+  </head>
+  <body>
+
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+        <!-- off-canvas title bar for 'small' screen -->
+        <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+          <div class="title-bar-left">
+            <ul class="menu">
+              <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+            </ul>
+          </div>
+          <div class="title-bar-right">
+            <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+          </div>
+        </div>
+
+        <!-- off-canvas left menu -->
+        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+          <!-- Close button -->
+          <button class="close-button" aria-label="Close menu" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          
+          <ul class="vertical dropdown menu" data-dropdown-menu>
+            <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+            <li><br></li>
+            <li><a class="hollowbutton button" href="studentpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+            <li><a class="hollowbutton button" href="studentassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+            <li><a class="hollowbutton button" href="studentpast.html"><i class="icons fi-list-bullet"></i><span>History</span></a></li>
+            <li><a class="hollowbutton button" href="studentreport.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+            <li><br></br></li>
+            <li><br></br></li>
+            <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+          </ul>
+        </div>
+
+        <!-- "wider" top-bar menu for 'medium' and up -->
+        <div id="widemenu" class="widemenu callout primary medium head">
+          <div class="row columns small-12 medium-12 large-12">
+            <div class="columns small-4 medium-4 large-4">
+            <ul class="menu align-left">
+              <li><a href="studentpage.html"><i class="icons fi-arrow-left"></i></a></li>
+              <li>
+                <ul class="dropdown menu" data-dropdown-menu>
+                  <li>
+                    <a href="#"><i class="icons fi-list"></i></a>
+                    <ul class="menu">
+                      <li><a href="studentassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+                      <li><a href="studentpast.html"><i class="icons fi-list-bullet"></i><span>History</span></a></li>
+                      <li><a href="studentreport.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            </div>
+            <div class="columns small-4 medium-4 large-4">
+              <ul class="menu-centered">
+                <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+              </ul>
+            </div>
+            <div class="columns small-4 medium-4 large-4">  
+            <ul class="menu align-right">
+              <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+            </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- original content goes in this container -->
+        <div class="off-canvas-content" data-off-canvas-content>
+          <div class="widebody">  
+            <div class="innerwidebody">
+              <div class="callout">
+                <fieldset class="fieldset">
+                  <legend>Messages</legend>
+                  <div class="row column">
+                    <table id="messages"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+                      <thead>
+                          <tr>
+                          	  <th>Date</th>
+                              <th>Sender</th>
+                              <th>Topic</th>
+                              <th>Content</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                              <th>Date</th>
+                              <th>Sender</th>
+                              <th>Topic</th>
+                              <th>Content</th>
+                          </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </fieldset>   
+              </div>     
+            </div>
+            <div class="hide-for-small-only">
+              <div class="text-center">
+                <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- close wrapper, no more content after this -->
+      </div>
+    </div>
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.accordion.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      document.getElementById("profilephoto1").src = parsedinfo.photo;
+      document.getElementById("profilephoto2").src = parsedinfo.photo;
+    });
+
+    $('#logout1').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('studentdata');
+      window.location.href = "index.html";
+    });
+
+    $('#logout2').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('studentdata');
+      window.location.href = "index.html";
+    });
+
+    </script>
+
+    <script type="text/javascript" language="javascript" >
+      $(document).ready(function() {
+        var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+          var dataTable = $('#messages').DataTable( {
+            "responsive": true,
+            "columnDefs":[
+	              {
+	                "targets": 0 ,"visible": false
+	              }
+              ],
+              "order":[[3,"desc"]],
+              "processing": true,
+              "serverSide": true,
+              "ajax":{
+                  url : csserver+"messagesdata.php", // json datasource
+                  type: "post",  // method  , by default get
+                  error: function(){  // error handling
+                      $(".messages-error").html("");
+                      $("#messages").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+                      $("#messages_processing").css("display","none");             
+                  }
+              }
+          } );
+      } );
+  </script>
+
+  </body>
+</html>

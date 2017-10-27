@@ -1,0 +1,273 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <!-- <link rel="stylesheet" type="text/css" href="dist/sweetalert.css"> -->
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert2.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <!-- <script src="dist/sweetalert.min.js"></script> -->
+    <script src="dist/sweetalert2.js"></script>
+
+  </head>
+  <body>
+  <div>   
+    <div class="signup">
+      <div class="signup-box">
+        <button id="back" class="hollowbutton hollow button" href="#">Back</button>
+          <fieldset class="fieldset">
+            <form action="" method="POST" enctype="multipart/form-data">
+              <div class="row columns small-12 medium-12 large-12">
+                <div class="row columns small-12 medium-12 large-12">
+                  <div class="columns small-6 medium-6 large-6"><input id="fname" type="text" name="fname" placeholder="First Name" required></div>
+                  <div class="columns small-6 medium-6 large-6"><input id="lname" type="text" name="lname" placeholder="Last Name" required></div>
+                </div>
+                <div class="row columns small-12 medium-12 large-12">
+                  <div class="columns small-6 medium-7 large-7"><input id="phone" type="number" name="phone" placeholder="Phone Number" required></div>
+                  <div class="columns small-6 medium-5 large-5"><input id="pword" type="password" name="pword" placeholder="Password" required></div>
+                </div>
+                <div class="row columns small-12 medium-12 large-12">
+                  <div class="columns medium-7 large-7"><input id="email" type="email" name="email" placeholder="Email Address" required></div>
+                  <div class="columns medium-5 large-5">
+                    <select id="user" name="user" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);" required>
+                      <option value="">Select User Type</option>
+                      <option value="1">Administrator</option>
+                      <option value="2">Student</option>
+                      <option value="3">Teacher</option>
+                      <option value="4">Parent</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="extras" class="row columns medium-12 large-12" style="display: none;">
+                  <div class="columns medium-8 large-8"><select id="sch" name="sch"></select></div>
+                  <div id="classdiv" class="columns medium-4 large-4"><select id="class" name="class"></select></div>
+                  <div id="mulclassdiv" class="columns medium-4 large-4" style="display: none;"><select multiple id="mulclass" name="mulclass"></select></div>
+                </div>
+                <input id="submit" type="submit" class="button expanded" name="submit" value="Sign Up">
+              </div>
+            </form> 
+          </fieldset> 
+      </div>
+        
+    </div>
+    
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      function error() {
+        swal({
+          title: 'Sorry', 
+          text: 'Fill all Fields!', 
+          type: 'error',
+          animation: false,
+          customClass: 'animated tada'
+        }); 
+      }
+
+      //class dropdown list
+      $.ajax({
+          type: 'POST',
+          url: csserver+'classservice.php?cmd=1',
+          success: function(data)
+          {
+            var myclass = JSON.parse(data);
+            var classselect = document.getElementById("class");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Select Class"));
+            classselect.appendChild(option);
+            for(var i = 0; i <= myclass.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', myclass[i].cno);
+                option.appendChild(document.createTextNode(myclass[i].cname));
+                classselect.appendChild(option);
+            }
+          }
+        });
+
+      $.ajax({
+          type: 'POST',
+          url: csserver+'classservice.php?cmd=1',
+          success: function(data)
+          {
+            var myclass = JSON.parse(data);
+            var classselect = document.getElementById("mulclass");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Select Classes"));
+            classselect.appendChild(option);
+            for(var i = 0; i <= myclass.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', myclass[i].cno);
+                option.appendChild(document.createTextNode(myclass[i].cname));
+                classselect.appendChild(option);
+            }
+          }
+        });
+
+      $.ajax({
+          type: 'POST',
+          url: csserver+'schoolservice.php?cmd=1',
+          success: function(data)
+          {
+            var mysch = JSON.parse(data);
+            var schselect = document.getElementById("sch");
+            option = document.createElement("option");
+            option.setAttribute('value', "");
+            option.appendChild(document.createTextNode("Select School"));
+            schselect.appendChild(option);
+            for(var i = 0; i <= mysch.length; i++) {
+                option = document.createElement("option");
+                option.setAttribute('value', mysch[i].SID);
+                option.appendChild(document.createTextNode(mysch[i].SCHOOL_NAME));
+                schselect.appendChild(option);
+            }
+          }
+        });
+
+      function jsonsuccess(data,username,password){
+        swal({
+          title: 'Great', 
+          text: 'Username: '+username+' | Password: '+password, 
+          type: 'success'
+        }).then(function(){ 
+          window.location.href = "index.html";
+        }); 
+      }
+
+      $('#submit').click(function(event) {
+        event.preventDefault();
+        var Signup = "Signup";
+        var fname = $("#fname").val();
+        var lname = $("#lname").val();
+        var username = fname+'.'+lname;
+        var password = $("#pword").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var usertype = $("#user").val();
+        var sch = $("#sch").val();
+        var clss = "";
+        if (usertype == 3) {
+          clss = $("#mulclass").val();
+        }else{
+          clss = $("#class").val();
+        }
+
+        if ((fname =="") || (lname =="") || (password =="") || (phone =="") || (email =="") || (usertype =="")) {
+          error();
+        }else {
+          var input = document.getElementById("photo"),
+          formdata = false;
+          
+          if (window.FormData) {
+            formdata = new FormData();
+          }
+
+          if (formdata) {
+            formdata.append("Signup", Signup);
+            formdata.append("fname", fname);
+            formdata.append("lname", lname);
+            formdata.append("username", username);
+            formdata.append("password", password);
+            formdata.append("phone", phone);
+            formdata.append("email", email);
+            formdata.append("utype", usertype);
+            formdata.append("sch", sch);
+            formdata.append("clss", clss);
+          }
+
+          if (formdata) {
+            $.ajax({
+              url: csserver+"login.php",
+              type: "POST",
+              data: formdata,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                var mydata = JSON.parse(data);
+                if (mydata) {
+                  jsonsuccess(mydata,username,password);
+                }else{
+                  error();
+                }
+              }
+            });
+          }
+        //var photo = document.getElementById("photo");
+        /*var pdata=new FormData();
+        //from inputs
+        pdata.append(photo.name,photo.files[0]);
+        pdata.append('username',username);
+
+        var xmlhttp=new XMLHttpRequest()
+        xmlhttp.open("POST", "login.php?Signup=Signup&photo="+photo);
+        xmlhttp.send(pdata);*/
+
+        /*var theurl = 'Signup='+Signup+'&username='+username+'&password='+password+'&fname='+fname+'&lname='+lname+'&photo='+photo+'&phone='+phone+'&email='+email+'&utype='+usertype+'&sch='+sch+'&clss='+clss;
+
+        $.ajax({
+          type: 'POST',
+          url: 'login.php',
+          data: theurl,
+          success: function(data)
+          {
+            var mydata = JSON.parse(data);
+            if (mydata) {
+              jsonsuccess(mydata,username,password);
+            }else{
+              error();
+            }
+          }
+        });*/
+      }
+      });
+
+
+      $('#signup').click(function(event) {
+        //event.preventDefault();
+        //window.location.href = "signup.html";
+      });
+
+      $('#back').click(function(event) {
+        event.preventDefault();
+        window.location.href = "index.html";
+      });
+
+    });
+
+    function dynamicdropdown(listindex){ 
+      var grade = listindex;
+      if (grade == '1'){
+        document.getElementById('extras').style.display = "block";
+        document.getElementById('mulclassdiv').style.display = "none";
+        document.getElementById('classdiv').style.display = "none";
+      }else if (grade == '2'){
+        document.getElementById('extras').style.display = "block";
+        document.getElementById('mulclassdiv').style.display = "none";
+        document.getElementById('classdiv').style.display = "block";
+      }else if (grade == '3'){
+        document.getElementById('extras').style.display = "block";
+        document.getElementById('mulclassdiv').style.display = "block";
+        document.getElementById('classdiv').style.display = "none";
+      }else if (grade == '4'){
+        document.getElementById('extras').style.display = "block";
+        document.getElementById('mulclassdiv').style.display = "none";
+        document.getElementById('classdiv').style.display = "none";
+      }
+    }
+    
+    </script>
+  </body>
+</html>

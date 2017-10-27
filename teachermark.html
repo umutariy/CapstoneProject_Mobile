@@ -1,0 +1,346 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grading</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+      <!-- off-canvas title bar for 'small' screen -->
+      <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+        <div class="title-bar-left">
+          <ul class="menu">
+            <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
+          </ul>
+        </div>
+        <div class="title-bar-right">
+          <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+        </div>
+      </div>
+
+      <!-- off-canvas left menu -->
+      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+        <!-- Close button -->
+        <button class="close-button" aria-label="Close menu" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+        <ul class="vertical dropdown menu" data-dropdown-menu>
+          <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+          <li><br></li>
+          <li><a class="hollowbutton button" href="teachergrade.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+          <li><a class="hollowbutton button" href="teachermessages.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+          <li><a class="hollowbutton button" href="teacherassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+          <li><a class="hollowbutton button" href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+          <li><a class="hollowbutton button" href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+          <li><br></br></li>
+          <li><br></br></li>
+          <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+        </ul>
+      </div>
+
+      <!-- "wider" top-bar menu for 'medium' and up -->
+      <div id="widemenu" class="widemenu callout primary medium head">
+        <div class="row columns small-12 medium-12 large-12">
+          <div class="columns small-4 medium-4 large-4">
+          <ul class="menu align-left">
+          <li><a href="teachergrade.html"><i class="icons fi-arrow-left"></i></a></li>
+            <li>
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <a href="#"><i class="icons fi-list"></i></a>
+                  <ul class="menu">
+                    <li><a href="teachermessages.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+                    <li><a href="teacherassignments.html"><i class="icons fi-list-thumbnails"></i><span>Assignments</span></a></li>
+                    <li><a href="teacherstudents.html"><i class="icons fi-male-female"></i><span>Students</span></a></li>
+                    <li><a href="teacherrecords.html"><i class="icons fi-graph-bar"></i><span>Records</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+          <div class="columns small-4 medium-4 large-4">
+            <ul class="menu-centered">
+              <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+            </ul>
+          </div>
+          <div class="columns small-4 medium-4 large-4">  
+          <ul class="menu align-right">
+            <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- original content goes in this container -->
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="widebody">  
+          <div class="innerwidebody">
+            <div class="callout">
+              <fieldset class="fieldset">
+                <legend>Mark</legend>
+                <div id="" class="row columns">
+                  <div class="columns small-12 medium-12 large-12">
+                    <div class="columns small-10 medium-10 large-10">
+                      <input id="title" type="text" name="title" placeholder="" disabled>
+                      <input id="assignnum" type="text" name="num" placeholder="" style="display: none">
+                      <input id="numofqs" type="text" name="num" placeholder="" style="display: none">
+                      <input id="description" type="text" name="description" placeholder="" style="display: none">
+                    </div>
+                    <div class="columns small-2 medium-2 large-2">
+                      <input id="marks" type="number" name="marks" placeholder="" disabled>
+                    </div>
+                  </div>
+                  <div id="assignarea" class="row columns small-12 medium-12 large-12">
+                  </div>
+                  <div>
+                  <input id="finish" type="submit" class="button expanded" name="finish" onclick="mark()" value="Finish">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="hide-for-small-only">
+            <div class="text-center">
+              <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- close wrapper, no more content after this -->
+    </div>
+  </div>
+
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/foundation/foundation.orbit.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var teacherinfo = sessionStorage.getItem('teacherdata');
+      var parsedinfo = JSON.parse(teacherinfo);
+      if (parsedinfo.photo == "") {
+        document.getElementById("profilephoto1").src = "default.png";
+        document.getElementById("profilephoto2").src = "default.png";
+      }else{
+        document.getElementById("profilephoto1").src = parsedinfo.photo;
+        document.getElementById("profilephoto2").src = parsedinfo.photo;
+      }
+
+      document.getElementById("marks").value = 0;
+
+      var id = parsedinfo.uid;
+      var schid = parsedinfo.schoolid;
+
+      var questions = localStorage.getItem("questiondata");
+      var parsedquestions = JSON.parse(questions);
+
+
+      $('#back1').click(function(event){
+        event.preventDefault();
+        localStorage.removeItem('questiondata');
+        localStorage.removeItem('answersdata');
+        window.location.href = "teachergrade.html";
+      });
+
+    });
+
+    var teacherinfo = sessionStorage.getItem('teacherdata');
+    var parsedinfo = JSON.parse(teacherinfo);
+    var id = parsedinfo.uid;
+
+    $('#logout1').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('teacherdata');
+      window.location.href = "index.html";
+    });
+
+    $('#logout2').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('teacherdata');
+      window.location.href = "index.html";
+    });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    var stid = localStorage.getItem("stid");
+    var questions = localStorage.getItem("questiondata");
+    var parsedquestions = JSON.parse(questions);
+    var answerarray= [];
+    var questionarray= [];
+    var marknum = 0;
+
+    $.ajax({
+        type: 'POST',
+        url: csserver+'assignmentservice.php',
+        data: 'cmd=3&assignmentnum='+parsedquestions,
+        success: function(data)
+        {
+          var myassignment = JSON.parse(data);
+          var assigndivs = document.getElementById("assignarea");
+          div1 = document.createElement("div");
+          div1.setAttribute('class', 'row');
+          div1.setAttribute('id', 'questionsarea');
+          document.getElementById("title").value = myassignment.tname;
+          document.getElementById("assignnum").value = parsedquestions;
+          begin(myassignment.questionnos);
+          assigndivs.appendChild(div1);
+        }
+      });
+
+    function begin(numbers){
+      jsonarray = JSON.stringify(numbers);
+      document.getElementById("numofqs").value = JSON.parse(jsonarray).length;
+
+      jQuery.get(csserver+'answersgetservice.php?number='+jsonarray+'&assid='+parsedquestions+'&stid='+stid).done(function (quests) {
+
+          var postquests = '<div id="solutions" class="columns small-12 medium-12 large-12">';
+          var numbers ='';
+
+          var myquestions = JSON.parse(quests);
+          for(var i = 0; i < myquestions.length; i++) {
+            j=i+1;
+      
+            postquests += '<div id="qbox'+i+'"';
+            postquests+= '<label> <b>Question '+j+' </b>: '+myquestions[i].qcontent+'<div><b>Correct Answer</b>: '+myquestions[i].answer+'</div></label>';
+            postquests += '<label><div><b>Student Answer</b>:';
+            postquests+='<div id="right'+i+'" class="columns medium-1 large-1" style="display:none;color:#98bf21;"><i class="icons fi-check"></i></div>';
+            postquests+='<div id="wrong'+i+'" class="columns medium-1 large-1" style="display:none;color:#B22222;"><i class="icons fi-x"></i></div>';
+            postquests += '<div id="box'+i+'" class="columns medium-12 large-12">';            
+            postquests += '<div class="columns medium-9 large-9" ><input id="solution'+i+'" type="text" placeholder="No Answer Here" value="'+myquestions[i].solution+'" disabled></div>';
+            postquests += '<div class="columns small-12 medium-2 large-2">';
+            postquests += '<div class="columns small-6 medium-6 large-6">';
+            postquests += '<a id="check'+i+'" onclick="correct('+i+')" href="#"><i class="icons fi-check"></i></a>';
+            postquests += '</div>';
+            postquests += '<div class="columns small-6 medium-6 large-6">';
+            postquests += '<a href="#" onclick="wrong('+i+')"><i class="icons fi-x"></i></a>';
+            postquests += '</div>';
+            postquests += '</div>';
+            postquests += '</div></label>';
+            postquests += '</div>';
+            postquests += '</div>';
+
+            postquests += '<div id="qnum'+j+'" style="display:none"><b>Question </b>'+j+': <button class="hollowbutton hollow button" href="#" onclick="undo('+j+')">Undo</button> <i id="right2'+i+'" class="icons fi-check" style="display:none;color:#98bf21;"></i> <i id="wrong2'+i+'" class="icons fi-x" style="display:none;color:#B22222;"></i></div>';
+            postquests += '<input id="mark'+i+'" type="number" disabled style="display:none;">';
+            questionarray.push(myquestions[i].qid);
+          }
+
+          postquests += '</div>';
+          jQuery('#assignarea').html(postquests);
+      });
+
+      jQuery(document ).ajaxComplete( function($) {
+        jQuery(this).foundation();
+      });
+    }
+
+    var yes = 1;
+    var no = 0;
+
+    function correct(id){
+      marknum = parseInt(document.getElementById("marks").value);
+      marknum++;
+      document.getElementById("marks").value = marknum;
+      $("#box"+id).show();
+      $("#right"+id).show();
+      $("#wrong"+id).hide();
+      $("#right2"+id).show();
+      $("#wrong2"+id).hide();
+      $('#qbox'+id).fadeOut(2000);
+      var ids = id +1;
+      $("#qnum"+ids).fadeIn(2000);
+      document.getElementById("mark"+id).value = yes;
+    }
+
+    function wrong(id){
+      $("#box"+id).show();
+      $("#right"+id).hide();
+      $("#wrong"+id).show();
+      $("#right2"+id).hide();
+      $("#wrong2"+id).show();
+      $('#qbox'+id).fadeOut(2000);
+      var ids = id +1;
+      $("#qnum"+ids).fadeIn(2000);
+      document.getElementById("mark"+id).value = no;
+    }
+
+    function undo(id){
+      var ids = id-1;
+      $("#qnum"+id).show();
+      if (parseInt(document.getElementById("marks").value) == 0) {
+        marknum = 0;
+      }else{
+        marknum = parseInt(document.getElementById("marks").value);
+        marknum--;
+      }
+      document.getElementById("marks").value = marknum;
+      $('#qbox'+ids).fadeIn(2000);
+      $("#box"+ids).show();
+      $("#right"+ids).hide();
+      $("#wrong"+ids).hide();
+      $("#qnum"+id).hide();
+      document.getElementById("mark"+ids).value = "";
+    }
+
+    function mark(){
+      var quests = questionarray;
+      var assid = document.getElementById("assignnum").value;
+      var questionid = [];
+      var marks = [];
+
+      var max = document.getElementById("numofqs").value;
+      for (var i = 0; i < max; i++) { 
+        marks.push(document.getElementById("mark"+i).value);
+        questionid.push(quests[i]);
+      }
+
+      jsonmarks = JSON.stringify(marks);
+      jsonquestionid = JSON.stringify(questionid);
+
+      //alert(jsonquestionid+' '+stid+' '+assid+' '+id+' '+jsonmarks);
+
+      $.ajax({
+        type: 'POST',
+        url: csserver+'answerservice.php',
+        data: 'cmd=6&quid='+jsonquestionid+'&stid='+stid+'&assid='+assid+'&tid='+id+'&marks='+jsonmarks,
+        success: function(data)
+        {
+          swal({
+            title: "Marked!",
+            type: "success"
+          },function(){ 
+            window.location.href = "teachergrade.html";
+          });
+        }
+      });
+      
+      localStorage.removeItem('answersdata');
+    }   
+    </script>
+    
+  </body>
+</html>

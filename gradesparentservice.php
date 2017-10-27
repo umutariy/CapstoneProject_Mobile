@@ -1,0 +1,79 @@
+<?php 
+include_once("grades.php");
+include_once("users.php");
+header('Access-Control-Allow-Origin: *');
+/** written by Brian Martey*/
+/** graph search service*/
+$chart = $_REQUEST['chart'];  //storing (get/post) request to a variable
+$requestStid = $_REQUEST['stid'];
+$data = array();
+$moredata = array();
+$gradecounts = array();
+$datearray = array();
+$percentage = array();
+$name = '';
+$gradearray =["A","B","C","D","E","F"];
+
+$grades = new grades(); //object of grades class
+$user = new users();
+if (!empty($chart)) {
+	switch ($chart) {
+		case 'bar':
+			for ($i=0; $i < count($gradearray); $i++) { 
+				$gradeslist = $grades->getgrades($requestStid,$gradearray[$i]);
+
+				while($row = $grades->fetch()){
+					$gradecounts[] = $row['COUNT(lettergrade)'];
+				}
+			}
+
+			for ($j=0; $j < count($gradearray); $j++) { 
+				$data['name'] = $gradearray[$j];
+				$data['y'] = $gradecounts[$j];
+				$moredata[] = $data;
+			}
+				
+			$json_data = $moredata;
+
+			echo json_encode($json_data); //send data as json format
+			break;
+
+		case 'series':
+			$gradeslist = $grades->getseriesgrades($requestStid);
+
+			while($row = $grades->fetch()){
+				$datearray["x"] = strtotime($row["date_submitted"])."000";
+				$datearray["y"] = $row["percentage"]; 
+				$moredata[] = $datearray;
+			}
+
+			$json_data = $moredata;
+
+			echo json_encode($json_data); //send data as json format
+
+			break;
+
+		case 'multiseries':
+			$gradeslist = $grades->getseriesno($requestStid);
+
+			while($row = $grades->fetch()){
+				$datearray = array((float)(strtotime($row["sdate"])."000"),(float)$row["count(percentage)"]);
+				$moredata[] = $datearray;
+			}
+
+			$json_data = $moredata;
+
+			echo json_encode($json_data); //send data as json format
+
+			break;
+		
+		default:
+			echo "error";
+			break;
+	}
+}else{
+	$data["status"] = "empty";
+
+	echo json_encode($data);
+}
+?>
